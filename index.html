@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head> 
+    <!--Encodage-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Lancez votre propre site d'avis de restaurants">
+    <meta name="author" content="Daryl LIVIO">
+    <!--Boostrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--CSS-->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleModal.css">
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
+    <!--Favicon-->
+    <link rel="shortcut icon" href="img/restaurant.png" type="image/x-icon">
+    <title>Avis de restaurants</title>
+</head>
+<body>
+    
+    <header class="container-fluid ">
+        <img src="img/logorestaurant.png" alt="logo du site" class="logo">
+        <h1 class="title" >Donnez votre avis sur vos restaurants</h1>
+    </header>
+    
+    <div class="container-fluid body">
+        <div id="conteneurLogoLancement">
+            <img src="img/logorestaurant.png" alt=logoRestarant id="logoLancement">
+            <p style="text-align: center;">Cliquer sur le logo</p>
+        </div>
+        <div class="row conteneur">
+            
+            <div class="col-md-8 col-lg-8 col-sm-12">
+                <div id="conteneurBouttonRecherche">
+                    <button type="button" class="btn btn-outline-secondary btn-lg" id="bouttonRecherche" >Recherche restaurant</button>
+                </div>
+                
+                <br>
+                <div class="googleMap" id="map"></div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-12" id="listeRestaurant"  >
+                <br>
+                <button id="revenir">Revenir à la liste</button>
+                <button id="ajouterCommentaire">Laisser un commentaire</button>
+                <div id="restaurantRank">
+                    <label for="minStarRank">Minimum</label>
+                    <select name="minStarRank" id="minStarRank">
+                        <option value="0" selected >0 Etoile</option>
+                        <option value="1" >1 Etoiles</option>
+                        <option value="2" >2 Etoiles</option>
+                        <option value="3" >3 Etoiles</option>
+                        <option value="4" >4 Etoiles</option>
+                        <option value="5" >5 Etoiles</option>
+                    </select>
+                    <label for="maxStarRank" id="maximum">Maximum</label>
+                    <select name="maxStarRank" id="maxStarRank">
+                        <option value="1">1 Etoiles</option>
+                        <option value="2">2 Etoiles</option>
+                        <option value="3">3 Etoiles</option>
+                        <option value="4">4 Etoiles</option>
+                        <option value="5" selected >5 Etoiles</option>
+                    </select>
+                </div> 
+                
+                <div class="restaurantList" style="width: auto; height:auto ;"></div> 
+                <p id="descriptionRestaurant"></p>
+                <div id="ajouterNouveauCommentaire"></div>
+                <div id="fenetreModale" class="modal">
+                    <div class="modale-content">
+                        <div class="modale-header">
+                            <span class="croixFermeture">&times;</span>
+                            <h4>Donnez votre avis sur ce restaurant</h4>
+                        </div>
+                        <div class="modale-body">
+                            <form id="formulaireCommentaire">
+                                <p>Notez ce restaurant sur une échelle de 1 à 5 :
+                                    <select  name="noteRestaurant" id="noteRestaurant" required>
+                                        <option selected value="" disabled>Note</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </p>
+                                <p>N'hésitez pas à laisser un commentaire </p>
+                                <Textarea  id="espaceCommentaire" placeholder="Vous pouvez écrire votre commentaire ici..." required  ></Textarea>
+                                <button id="btnValidationFormulaire" type="submit">Valider</button>
+                                <button id="boutonFermetureFormulaire" type="reset" >Fermer</button>
+                            </form>
+                        </div>
+                        <div class="modale-footer">
+                            <img src="img/logorestaurant.png" alt="logoRestaurant" >
+                        </div>
+                    </div>
+                </div>
+                <div id="fenetreModaleRestaurant" class="modal">
+                    <div class="modale-content">
+                        <div class="modale-header">
+                            <span class="croixFermeture">&times;</span>
+                            <h4>Ajouter un restaurant</h4>
+                        </div>
+                        <div class="modale-body">
+                            <form id="formulaireAjoutRestaurant">
+                                <label for="nomDuNouveauRestaurant">Nom</label>
+                                <input type="text" id="nomDuNouveauRestaurant" name="nomNouveauRestaurant" placeholder="le nom du restaurant..." required  >
+                                <label for="adresseDuNouveauRestaurant">Adresse</label>
+                                <input type="text" id="adresseDuNouveauRestaurant" name="adresseNouveauRestaurant" placeholder="l'adresse..." required >
+                                <div class="formulaireNouveauRestaurant">
+                                </div>
+                                <p>Notez ce restaurant sur une échelle de 1 à 5 :
+                                    <select name="noteNouveauRestaurant" id="noteNouveauRestaurant">
+                                        <option disabled selected value >Note</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </p>
+                                <p>N'hésitez pas à laisser un commentaire</p>
+                                <Textarea  id="espaceCommentaireNouveauRestaurant" placeholder="Vous pouvez écrire votre commentaire ici..."required></Textarea>
+                                <button id="btnValidationFormulaireNouveauRestaurant" type="submit">Valider</button>
+                                <button id="btnFermetureFormulaireNouveauRestaurant" type="reset" >Fermer</button>
+                            </form>
+                        </div>
+                        <div class="modale-footer">
+                            <img src="img/logorestaurant.png" alt="logoRestaurant" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- fichier JQUERY -->
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+    <!-- Popper boostrap -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="lancement.js" type="module"></script>
+    <script src="main.js" type="module"></script>
+    <script src="chargementLibrairieGoogleMap.js"></script>
+    <script src="googleMap.js" type="module" ></script>
+    <script src="donneesRestaurant.js" type="module"></script>
+    
+</body>
+</html>
