@@ -3,7 +3,7 @@ import { GoogleMap } from "./googleMap.js"
 export class Main {
     constructor() {
         {
-            $script("https://maps.googleapis.com/maps/api/js?key=AIzaSyAdXVJEBNlfp2ocuj3ynGnG8vayUtpOIwo&libraries=places", () => {
+            $script("https://maps.googleapis.com/maps/api/js?key=XXXXXXXXXXXX&libraries=places", () => {
             // Test si la géolocalisation grace à l'API javascript  est disponible //
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
